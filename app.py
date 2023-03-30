@@ -1,14 +1,18 @@
 
+import subprocess
+subprocess.run(["pip", "install", "openai"])
+subprocess.run(["pip", "install", "soundfile"])
 
-
+import os
+import openai
 from numpy import True_
 import gradio as gr
-import openai, subprocess
-import os
 import soundfile as sf
 from pydub import AudioSegment
 
-%cd /content/drive/MyDrive/Colab_Notebooks/
+# Load your API key from an environment variable or secret management service
+openai.api_key = os.environ.get('OPENAI_SECRET_KEY')
+
 note_transcript = ""
 
 def transcribe(audio, history_type):
