@@ -2,6 +2,7 @@
 import subprocess
 subprocess.run(["pip", "install", "openai"])
 subprocess.run(["pip", "install", "soundfile"])
+subprocess.run[("pip","install","pydub")]
 
 import os
 import openai
