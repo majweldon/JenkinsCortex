@@ -19,32 +19,19 @@ note_transcript = ""
 def transcribe(audio, history_type):
   global note_transcript    
      
-  if history_type == "History":
-    with open("Format_Library/Weldon_Note_Format.txt", "r") as f:
-      role = f.read()
-  elif history_type == "Physical":
-    with open("Format_Library/Weldon_PE_Note_Format.txt", "r") as f:
-      role = f.read()
-  elif history_type == "H+P":
-    with open("Format_Library/Weldon_Full_Note_Format.txt", "r") as f:
-      role = f.read()
-  elif history_type == "Impression/Plan":
-    with open("Format_Library/Weldon_Impression_Note_Format.txt", "r") as f:
-      role = f.read()
-  elif history_type == "Handover":
-    with open("Format_Library/Weldon_Handover_Note_Format.txt", "r") as f:
-      role = f.read()
-  elif history_type == "Meds Only":
-    with open("Format_Library/Medications.txt", "r") as f:
-      role = f.read()
-  elif history_type == "EMS":
-    with open("Format_Library/EMS_Handover_Note_Format.txt", "r") as f:
-      role = f.read()
-  elif history_type == "Triage":
-    with open("Format_Library/Triage_Note_Format.txt", "r") as f:
-      role = f.read()
-  else:
-    with open("Format_Library/Weldon_Full_Note_Format.txt", "r") as f:
+  history_type_map = {
+      "History": "Weldon_Note_Format.txt",
+      "Physical": "Weldon_PE_Note_Format.txt",
+      "H+P": "Weldon_Full_Note_Format.txt",
+      "Impression/Plan": "Weldon_Impression_Note_Format.txt",
+      "Handover": "Weldon_Handover_Note_Format.txt",
+      "Meds Only": "Medications.txt",
+      "EMS": "EMS_Handover_Note_Format.txt",
+      "Triage": "Triage_Note_Format.txt"
+   }
+    
+  file_name = history_type_map.get(history_type, "Weldon_Full_Note_Format.txt")
+  with open(f"Format_Library/{file_name}", "r") as f:
       role = f.read()
 
   messages = [{"role": "system", "content": role}]
@@ -58,9 +45,14 @@ def transcribe(audio, history_type):
   #audio_data = (audio_data * 32767).astype("int16")
   #audio_data = audio_data.mean(axis=1)
   sf.write("Audio_Files/test.wav", audio_data, samplerate, subtype='PCM_16')
+  if not os.path.exists("Audio_Files/test.wav"):
+      print("Error: Failed to create test.wav file")
+      return
   sound = AudioSegment.from_wav("Audio_Files/test.wav")
   sound.export("Audio_Files/test.mp3", format="mp3")
-
+  if not os.path.exists("Audio_Files/test.mp3"):
+      print("Error: Failed to create test.mp3 file")
+      return
 
   #Send file to Whisper for Transcription
   audio_file = open("Audio_Files/test.mp3", "rb")
