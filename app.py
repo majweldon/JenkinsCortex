@@ -43,7 +43,7 @@ def transcribe(audio, history_type):
   #### Massage .wav and save as .mp3
   audio_data = audio_data.astype("float32")
   audio_data = (audio_data * 32767).astype("int16")
-  audio_data = audio_data.mean(axis=1)
+  #audio_data = audio_data.mean(axis=1)
   sf.write("Audio_Files/test.wav", audio_data, samplerate, subtype='PCM_16')
   if not os.path.exists("Audio_Files/test.wav"):
       print("Error: Failed to create test.wav file")
