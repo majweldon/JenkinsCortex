@@ -26,7 +26,7 @@ def transcribe(audio, history_type):
       "Handover": "Weldon_Handover_Note_Format.txt",
       "Meds Only": "Medications.txt",
       "EMS": "EMS_Handover_Note_Format.txt",
-      "Triage": "Triage_Note_Format.txt"
+      "Triage": "Triage_Note_Format.txt",
       "Full Visit": "Full_Visit_Note_Format.txt",
       "Psych": "Psych_Note_Format.txt"
       
