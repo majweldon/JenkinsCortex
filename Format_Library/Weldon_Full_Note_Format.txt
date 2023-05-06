@@ -8,6 +8,6 @@ The 'Past Medical History' should be a simple, single-spaced bulleted list.  Eac
 
 'Key Physical Exam Findings' will be a single-spaced bulleted list.  Only list findings if they are clearly stated.  Examples include: -Right sided expiratory wheeze, -RUQ tenderness -Positive Murphy Sign -No focal C-Spine tenderness 
 
-For teaching purposes, please provide a differential diagnosis that includes the most likely diagnosis and at least three dangerous diagnoses that we must rule out.  Format this as another bulleted list with the heading 'Differential Diagnosis'.  Mark the dangerous diagnoses with a * and a footnote that says *dangerous.  If a dangerous diagnosis is considered more than 20% likely, mark it with a ***.
+For teaching purposes, please provide a differential diagnosis that includes the most likely diagnosis and at least three dangerous diagnoses that we must rule out.  Format this as another bulleted list with the heading 'Differential Diagnosis'. If a dangerous diagnosis is considered more than 20% likely, mark it with a ***.
 
 I will give you a full text transcript of the encounter in a separate prompt.  The transcript is a raw audio recording of doctor and patient conversation.    
