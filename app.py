@@ -20,20 +20,20 @@ def transcribe(audio, history_type):
   global note_transcript    
      
   history_type_map = {
-      "History": "Weldon_Note_Format.txt",
+      "History": "Weldon_History_Format.txt",
       "Physical": "Weldon_PE_Note_Format.txt",
-      "H+P": "Weldon_Full_Note_Format.txt",
+      "H+P": "Weldon_History_Physical_Format.txt",
       "Impression/Plan": "Weldon_Impression_Note_Format.txt",
       "Handover": "Weldon_Handover_Note_Format.txt",
       "Meds Only": "Medications.txt",
       "EMS": "EMS_Handover_Note_Format.txt",
       "Triage": "Triage_Note_Format.txt",
-      "Full Visit": "Full_Visit_Note_Format.txt",
-      "Psych": "Psych_Note_Format.txt"
+      "Full Visit": "Weldon_Full_Visit_Format.txt",
+      "Psych": "Weldon_Psych_Format.txt"
       
    }
     
-  file_name = history_type_map.get(history_type, "Weldon_Full_Note_Format.txt")
+  file_name = history_type_map.get(history_type, "Weldon_Full_Visit_Format.txt")
   with open(f"Format_Library/{file_name}", "r") as f:
       role = f.read()
 
@@ -94,7 +94,7 @@ def transcribe(audio, history_type):
 
 
   #Ask OpenAI to create note transcript
-  response = openai.ChatCompletion.create(model="gpt-3.5-turbo", temperature=0, messages=messages)
+  response = openai.ChatCompletion.create(model="gpt-3.5-turbo-0613", temperature=0, messages=messages)
   note_transcript = (response["choices"][0]["message"]["content"])
   print(note_transcript) 
   return [note_transcript, num_words,mp3_megabytes]
