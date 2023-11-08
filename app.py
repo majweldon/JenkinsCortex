@@ -1,8 +1,3 @@
-import subprocess
-subprocess.run(["pip", "install", "openai"])
-subprocess.run(["pip", "install", "soundfile"])
-subprocess.run(["pip","install","pydub"])
-
 import os
 import openai
 import time
@@ -11,8 +6,11 @@ import gradio as gr
 import soundfile as sf
 from pydub import AudioSegment
 
-# Load your API key from an environment variable or secret management service
-openai.api_key = os.environ.get('OPENAI_SECRET_KEY')
+from openai import OpenAI
+
+# Load API key from an environment variable
+OPENAI_SECRET_KEY = os.environ.get("OPENAI_SECRET_KEY")
+client = OpenAI(api_key = OPENAI_SECRET_KEY)
 
 note_transcript = ""
 
@@ -64,7 +62,7 @@ def transcribe(audio, history_type):
   attempt = 0
   while attempt < max_attempts:
       try:
-          audio_transcript = openai.Audio.transcribe("whisper-1", audio_file)
+          audio_transcript = client.audio.transcriptions.create(model="whisper-1", file=audio_file)
           break
       except openai.error.APIConnectionError as e:
           print(f"Attempt {attempt + 1} failed with error: {e}")
@@ -73,8 +71,8 @@ def transcribe(audio, history_type):
   else:
       print("Failed to transcribe audio after multiple attempts")  
     
-  print(audio_transcript)
-  messages.append({"role": "user", "content": audio_transcript["text"]})
+  print(audio_transcript.text)
+  messages.append({"role": "user", "content": audio_transcript.text})
   
   #Create Sample Dialogue Transcript from File (for debugging)
   #with open('Audio_Files/Test_Elbow.txt', 'r') as file:
@@ -87,15 +85,15 @@ def transcribe(audio, history_type):
   mp3_megabytes = file_size / (1024 * 1024)
   mp3_megabytes = round(mp3_megabytes, 2)
 
-  audio_transcript_words = audio_transcript["text"].split() # Use when using mic input
+  audio_transcript_words = audio_transcript.text.split() # Use when using mic input
   #audio_transcript_words = audio_transcript.split() #Use when using file
 
   num_words = len(audio_transcript_words)
 
 
   #Ask OpenAI to create note transcript
-  response = openai.ChatCompletion.create(model="gpt-3.5-turbo-0613", temperature=0, messages=messages)
-  note_transcript = (response["choices"][0]["message"]["content"])
+  response = client.chat.completions.create(model="gpt-3.5-turbo-1106", temperature=0, messages=messages)
+  note_transcript = response.choices[0].message.content
   print(note_transcript) 
   return [note_transcript, num_words,mp3_megabytes]
 
