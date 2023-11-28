@@ -31,7 +31,7 @@ def transcribe(audio, history_type):
       
    }
     
-  file_name = history_type_map.get(history_type, "Weldon_Default_Format.txt")
+  file_name = history_type_map.get(history_type, "Weldon_Full_Visit_Format.txt")
   with open(f"Format_Library/{file_name}", "r") as f:
       role = f.read()
 
