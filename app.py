@@ -36,12 +36,7 @@ def transcribe(audio, history_type):
   messages = [{"role": "system", "content": role}]
 
   ######################## Read audio file, wait as necessary if not written
-  max_attempts = 3
-  attempt = 0
-  audio_data = None
-  samplerate = None
-    
-  max_attempts = 3
+  max_attempts = 30
   attempt = 0
   audio_data = None
   samplerate = None
@@ -54,7 +49,7 @@ def transcribe(audio, history_type):
       except (OSError, TypeError) as e:
           print(f"Attempt {attempt + 1} of {max_attempts} failed with error: {e}")
           attempt += 1
-          time.sleep(3+3*attempt)
+          time.sleep(3)
   else:
       print(f"###############Failed to open audio file after {max_attempts} attempts.##############")
       return  # Terminate the function or raise an exception if the file could not be opened
@@ -63,7 +58,6 @@ def transcribe(audio, history_type):
   ###### Create Dialogue Transcript from Audio Recording and Append(via Whisper)
   # Load the audio file (from filepath)
   
-
   #### Massage .wav and save as .mp3
   audio_data = audio_data.astype("float32")
   audio_data = (audio_data * 32767).astype("int16")
