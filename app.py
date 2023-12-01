@@ -38,6 +38,9 @@ def transcribe(audio, history_type):
   ######################## Read audio file, wait as necessary if not written
   max_attempts = 3
   attempt = 0
+  audio_data = None
+  samplerate = None
+    
   while attempt < max_attempts:
       try:
           audio_data, samplerate = sf.read(audio)
@@ -47,7 +50,7 @@ def transcribe(audio, history_type):
           attempt += 1
           time.sleep(3+3*attempt) # wait increasing amounts
   else:
-      print(f"Failed to open audio file after {max_attempt} attempts.") 
+      print(f"Failed to open audio file after {max_attempts} attempts.") 
 
   
 
