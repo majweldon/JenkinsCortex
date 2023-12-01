@@ -30,7 +30,7 @@ def transcribe(audio, history_type):
       "Psych": "Weldon_Psych_Format.txt"
       
    }
-    
+  time.sleep(25) ## time delay required for proper audio capture.  I hate this.
   file_name = history_type_map.get(history_type, "Weldon_Full_Visit_Format.txt")
   with open(f"Format_Library/{file_name}", "r") as f:
       role = f.read()
