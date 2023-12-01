@@ -41,18 +41,24 @@ def transcribe(audio, history_type):
   audio_data = None
   samplerate = None
     
+  max_attempts = 3
+  attempt = 0
+  audio_data = None
+  samplerate = None
   while attempt < max_attempts:
       try:
+          if audio is None:
+              raise TypeError("Invalid file: None")
           audio_data, samplerate = sf.read(audio)
           break
-      except (TypeError, OSError) as e:
-          print(f"Attempt {attempt + 1} failed with error: {e}")
+      except (OSError, TypeError) as e:
+          print(f"Attempt {attempt + 1} of {max_attempts} failed with error: {e}")
           attempt += 1
-          time.sleep(3+3*attempt) # wait increasing amounts
+          time.sleep(3+3*attempt)
   else:
-      print(f"##############Failed to open audio file after {max_attempts} attempts.#################") 
+      print(f"###############Failed to open audio file after {max_attempts} attempts.##############")
+      return  # Terminate the function or raise an exception if the file could not be opened
 
-  
 
   ###### Create Dialogue Transcript from Audio Recording and Append(via Whisper)
   # Load the audio file (from filepath)
