@@ -45,12 +45,12 @@ def transcribe(audio, history_type):
       try:
           audio_data, samplerate = sf.read(audio)
           break
-      except OSError as e:
+      except (TypeError, OSError) as e:
           print(f"Attempt {attempt + 1} failed with error: {e}")
           attempt += 1
           time.sleep(3+3*attempt) # wait increasing amounts
   else:
-      print(f"Failed to open audio file after {max_attempts} attempts.") 
+      print(f"##############Failed to open audio file after {max_attempts} attempts.#################") 
 
   
 
