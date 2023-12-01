@@ -30,16 +30,30 @@ def transcribe(audio, history_type):
       "Psych": "Weldon_Psych_Format.txt"
       
    }
-  time.sleep(25) ## time delay required for proper audio capture.  I hate this.
   file_name = history_type_map.get(history_type, "Weldon_Full_Visit_Format.txt")
   with open(f"Format_Library/{file_name}", "r") as f:
-      role = f.read()
-
+    role = f.read()
   messages = [{"role": "system", "content": role}]
+
+  ######################## Read audio file, wait as necessary if not written
+  max_attempts = 3
+  attempt = 0
+  while attempt < max_attempts:
+      try:
+          audio_data, samplerate = sf.read(audio)
+          break
+      except openai.error.APIConnectionError as e:
+          print(f"Attempt {attempt + 1} failed with error: {e}")
+          attempt += 1
+          time.sleep(3+3*attempt) # wait increasing amounts
+  else:
+      print(f"Failed to open audio file after {attempt} attempts.") 
+
+  
 
   ###### Create Dialogue Transcript from Audio Recording and Append(via Whisper)
   # Load the audio file (from filepath)
-  audio_data, samplerate = sf.read(audio)
+  
 
   #### Massage .wav and save as .mp3
   audio_data = audio_data.astype("float32")
