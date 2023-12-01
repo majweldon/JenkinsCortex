@@ -99,7 +99,7 @@ def transcribe(audio, history_type):
 
 #Define Gradio Interface
 my_inputs = [
-    gr.Audio(source="microphone", type="filepath"),
+    gr.Audio(sources=["microphone"], type="filepath"),
     gr.Radio(["History","H+P","Impression/Plan","Full Visit","Handover","Psych","EMS","Meds Only"], show_label=False),
 ]
 
