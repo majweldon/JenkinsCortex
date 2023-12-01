@@ -1,3 +1,4 @@
+---
 title: AIScribe
 emoji: ⚡
 colorFrom: red
@@ -7,3 +8,4 @@ sdk_version: 4.1.2
 app_file: app.py
 pinned: false
 python_version: 3.9.13
+---
