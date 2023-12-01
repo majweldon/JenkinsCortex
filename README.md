@@ -1,4 +1,3 @@
----
 title: AIScribe
 emoji: ⚡
 colorFrom: red
