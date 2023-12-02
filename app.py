@@ -15,7 +15,8 @@ client = OpenAI(api_key = OPENAI_SECRET_KEY)
 note_transcript = ""
 
 def transcribe(audio, history_type):
-  global note_transcript    
+  global note_transcript
+  print(f"Received audio file path: {audio}")
      
   history_type_map = {
       "History": "Weldon_History_Format.txt",
