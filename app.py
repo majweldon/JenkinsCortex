@@ -125,9 +125,8 @@ ui = gr.Interface(fn=transcribe,
                   inputs=my_inputs, 
                   outputs=[gr.Textbox(label="Your Note", show_copy_button=True),
                            gr.Number(label="Audio Word Count"),
-                           gr.Number(label=".mp3 MB")],
-                           preprocess=True,
+                           gr.Number(label=".mp3 MB")]
                  )
 
 
-ui.launch(share=False, debug=True)
+ui.launch(share=False, debug=True, preprocess=True)
