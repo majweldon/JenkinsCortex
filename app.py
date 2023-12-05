@@ -37,7 +37,7 @@ def transcribe(audio, history_type):
   messages = [{"role": "system", "content": role}]
 
   ######################## Read audio file, wait as necessary if not written
-  max_attempts = 30
+  max_attempts = 1
   attempt = 0
   audio_data = None
   samplerate = None
@@ -56,24 +56,20 @@ def transcribe(audio, history_type):
       return  # Terminate the function or raise an exception if the file could not be opened
 
 
-  ###### Create Dialogue Transcript from Audio Recording and Append(via Whisper)
-  # Load the audio file (from filepath)
-  
-  #### Massage .wav and save as .mp3
-  audio_data = audio_data.astype("float32")
-  audio_data = (audio_data * 32767).astype("int16")
+  ########## Cast as float 32, normalize
+  #audio_data = audio_data.astype("float32")
+  #audio_data = (audio_data * 32767).astype("int16")
   #audio_data = audio_data.mean(axis=1)
+
+  ###################Code to convert .wav to .mp3 (if neccesary)
   sf.write("Audio_Files/test.wav", audio_data, samplerate, subtype='PCM_16')
-  if not os.path.exists("Audio_Files/test.wav"):
-      print("Error: Failed to create test.wav file")
-      return
   sound = AudioSegment.from_wav("Audio_Files/test.wav")
   sound.export("Audio_Files/test.mp3", format="mp3")
-  if not os.path.exists("Audio_Files/test.mp3"):
-      print("Error: Failed to create test.mp3 file")
-      return
 
-  #Send file to Whisper for Transcription
+  sf.write("Audio_Files/test.mp3", audio_data, samplerate)
+  
+    
+  ################  Send file to Whisper for Transcription
   audio_file = open("Audio_Files/test.mp3", "rb")
   
   max_attempts = 3
@@ -117,7 +113,7 @@ def transcribe(audio, history_type):
 
 #Define Gradio Interface
 my_inputs = [
-    gr.Audio(sources=["microphone"], type="filepath"),
+    gr.Audio(sources=["microphone"], type="filepath",format="mp3"),
     gr.Radio(["History","H+P","Impression/Plan","Full Visit","Handover","Psych","EMS","Meds Only"], show_label=False),
 ]
 
