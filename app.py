@@ -8,9 +8,15 @@ from pydub import AudioSegment
 
 from openai import OpenAI
 
+import subprocess
+myGradioEnvironment = subprocess.run(['gradio','environment'], stdout=subprocess.PIPE)
+print(myGradioEnvironment.stdout.decode('utf-8'))
+
 # Load API key from an environment variable
 OPENAI_SECRET_KEY = os.environ.get("OPENAI_SECRET_KEY")
 client = OpenAI(api_key = OPENAI_SECRET_KEY)
+
+
 
 note_transcript = ""
 
