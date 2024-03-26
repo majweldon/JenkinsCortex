@@ -135,4 +135,4 @@ ui = gr.Interface(fn=transcribe,
                  )
 
 
-ui.launch(share=False, debug=True, head="Jenkins")
+ui.launch(share=False, debug=True)
