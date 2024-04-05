@@ -3,6 +3,7 @@ import openai
 import time
 from numpy import True_
 import gradio as gr
+from gradio_rich_textbox import RichTextbox
 import soundfile as sf
 from pydub import AudioSegment
 
@@ -129,7 +130,7 @@ my_inputs = [
 
 ui = gr.Interface(fn=transcribe, 
                   inputs=my_inputs, 
-                  outputs=[gr.Textbox(label="Your Note", show_copy_button=True),
+                  outputs=[gr.RichTextbox(label="Your Note (GPT 3.5 Turbo)", show_copy_button=True),
                            gr.Number(label="Audio Word Count"),
                            gr.Number(label=".mp3 MB")]
                  )
