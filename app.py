@@ -115,8 +115,8 @@ def transcribe(audio, history_type):
 
 
   #Ask OpenAI to create note transcript
-  #response = client.chat.completions.create(model="gpt-4-1106-preview", temperature=0, messages=messages)
-  response = client.chat.completions.create(model="gpt-3.5-turbo", temperature=0, messages=messages)
+  response = client.chat.completions.create(model="gpt-4-turbo-preview", temperature=0, messages=messages)
+  #response = client.chat.completions.create(model="gpt-3.5-turbo", temperature=0, messages=messages)
     
   note_transcript = response.choices[0].message.content
   print(note_transcript) 
@@ -130,7 +130,7 @@ my_inputs = [
 
 ui = gr.Interface(fn=transcribe, 
                   inputs=my_inputs, 
-                  outputs=[RichTextbox(label="Your Note (GPT 3.5 Turbo)"),
+                  outputs=[RichTextbox(label="Your Note (gpt4-turbo-preview)"),
                            #gr.Textbox(label="Your Note (GPT 3.5 Turbo)", show_copy_button=True),
                            gr.Number(label="Audio Word Count"),
                            gr.Number(label=".mp3 MB")]
