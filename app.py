@@ -120,7 +120,7 @@ def transcribe(audio, history_type):
     
   note_transcript = response.choices[0].message.content
   print(note_transcript) 
-  return [note_transcript, num_words,mp3_megabytes]
+  return [note_transcript, num_words, note_transcript, mp3_megabytes]
 
 #Define Gradio Interface
 my_inputs = [
