@@ -3,7 +3,7 @@ title: AIScribe
 emoji: ⚡
 colorFrom: red
 colorTo: red
-#sdk: gradio
+sdk: gradio
 #sdk_version: 4.14.0
 app_file: app.py
 pinned: false
