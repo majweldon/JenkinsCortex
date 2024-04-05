@@ -120,7 +120,7 @@ def transcribe(audio, history_type):
     
   note_transcript = response.choices[0].message.content
   print(note_transcript) 
-  return [note_transcript, num_words, note_transcript, mp3_megabytes]
+  return [note_transcript, num_words, mp3_megabytes]
 
 #Define Gradio Interface
 my_inputs = [
@@ -130,9 +130,9 @@ my_inputs = [
 
 ui = gr.Interface(fn=transcribe, 
                   inputs=my_inputs, 
-                  outputs=[gr.Textbox(label="Your Note (GPT 3.5 Turbo)", show_copy_button=True),
+                  outputs=[RichTextbox(label="Your Note (GPT 3.5 Turbo)", show_copy_button=True),
+                           #gr.Textbox(label="Your Note (GPT 3.5 Turbo)", show_copy_button=True),
                            gr.Number(label="Audio Word Count"),
-                           RichTextbox(),
                            gr.Number(label=".mp3 MB")]
                  )
 
