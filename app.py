@@ -130,10 +130,11 @@ my_inputs = [
 
 ui = gr.Interface(fn=transcribe, 
                   inputs=my_inputs, 
-                  outputs=[RichTextbox(label="Your Note (gpt4-turbo-preview)"),
+                  outputs=[RichTextbox(label="Your Note (gpt4-turbo-preview)", elem_id="htext"),
                            #gr.Textbox(label="Your Note (GPT 3.5 Turbo)", show_copy_button=True),
                            gr.Number(label="Audio Word Count"),
-                           gr.Number(label=".mp3 MB")]
+                           gr.Number(label=".mp3 MB")],
+                  css="#htext span {white-space: pre}"
                  )
 
 
