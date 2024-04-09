@@ -45,24 +45,29 @@ def transcribe(audio, history_type):
     role = f.read()
   messages = [{"role": "system", "content": role}]
 
-  ######################## Read audio file, wait as necessary if not written
-  max_attempts = 1
-  attempt = 0
-  audio_data = None
-  samplerate = None
-  while attempt < max_attempts:
-      try:
-          if audio is None:
-              raise TypeError("Invalid file: None")
-          audio_data, samplerate = sf.read(audio)
-          break
-      except (OSError, TypeError) as e:
-          print(f"Attempt {attempt + 1} of {max_attempts} failed with error: {e}")
-          attempt += 1
-          time.sleep(3)
-  else:
-      print(f"###############Failed to open audio file after {max_attempts} attempts.##############")
-      return  # Terminate the function or raise an exception if the file could not be opened
+
+
+
+  ######################## Take Audio from Numpy Array
+  samplerate, audio_data = audio
+  ######################## Read audio file, if using file
+  #max_attempts = 1
+  #attempt = 0
+  #audio_data = None
+  #samplerate = None
+  #while attempt < max_attempts:
+  #    try:
+  #        if audio is None:
+  #            raise TypeError("Invalid file: None")
+  #        audio_data, samplerate = sf.read(audio)
+  #        break
+  #    except (OSError, TypeError) as e:
+  #        print(f"Attempt {attempt + 1} of {max_attempts} failed with error: {e}")
+  #        attempt += 1
+  #        time.sleep(3)
+  #else:
+  #    print(f"###############Failed to open audio file after {max_attempts} attempts.##############")
+  #    return  # Terminate the function or raise an exception if the file could not be opened
 
 
   ########## Cast as float 32, normalize
