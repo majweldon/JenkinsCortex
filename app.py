@@ -36,11 +36,11 @@ def transcribe(audio, history_type):
       "EMS": "EMS_Handover_Note_Format.txt",
       "Triage": "Triage_Note_Format.txt",
       "Full Visit": "Weldon_Full_Visit_Format.txt",
-      "Psych": "Weldon_Psych_Format.txt",
+      "Psych": "Weldon_Psych_Format_HTML.txt",
       "SBAR": "SBAR.txt"
       
    }
-  file_name = history_type_map.get(history_type, "Weldon_Full_Visit_Format.txt")
+  file_name = history_type_map.get(history_type, "Weldon_Full_Visit_Format_HTML.txt")
   with open(f"Format_Library/{file_name}", "r") as f:
     role = f.read()
   messages = [{"role": "system", "content": role}]
