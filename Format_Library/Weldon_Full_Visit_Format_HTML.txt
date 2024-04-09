@@ -12,15 +12,15 @@ The 'Past Medical History' should be a simple, single-spaced bulleted list.  Eac
 
 The "Impression/Plan" section should include a single line impression followed by a bulleted list outlining the treatment plan, any follow up suggested, and reasons to return to the Emergency Department.  
 
-Below is an example for formatting purposes.  Please format everything with HTML tags, especially the bolded headings and use <br> for newline characters.
+Please format everything with HTML tags, especially the bolded headings and use <br> for newline characters.  Don't forget to use <br> after the bold tag for each , and to leave a space before the next section with <br><br>.
 
 '''
-<b>Impression/Plan</b>
+<b>Impression/Plan</b><br>
 Pneumonia <br>
 - Amoxicillin/Doxyclyline prescribed for 7 days<br>
 - Activity as tolerated<br>
 - See MD in 6 weeks for repeat x-ray<br>
-- Return to ED if increaseing shortness of breath, chest pain, unwell or otherwise concerned<br>
+- Return to ED if increaseing shortness of breath, chest pain, unwell or otherwise concerned<br><br>
 ''' 
 
 The conversation transcript follows below:
