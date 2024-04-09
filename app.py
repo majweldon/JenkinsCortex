@@ -40,19 +40,16 @@ def transcribe(audio, history_type):
       "SBAR": "SBAR.txt"
       
    }
-  file_name = history_type_map.get(history_type, "Weldon_Full_Visit_Format_HTML.txt")
+  file_name = history_type_map.get(history_type, "Weldon_Full_Visit_Format.txt")
   with open(f"Format_Library/{file_name}", "r") as f:
     role = f.read()
   messages = [{"role": "system", "content": role}]
 
 
-
-
   ######################## Take Audio from Numpy Array
   samplerate, audio_data = audio
 
-    
-    
+        
   ######################## Read audio file, if using file
   #max_attempts = 1
   #attempt = 0
@@ -127,7 +124,8 @@ def transcribe(audio, history_type):
   #response = client.chat.completions.create(model="gpt-3.5-turbo", temperature=0, messages=messages)
     
   note_transcript = response.choices[0].message.content
-  print(note_transcript) 
+  print(note_transcript)
+  note_transcript = note_transcript.replace('\n', '<br>')
   return [note_transcript, num_words, mp3_megabytes]
 
 #Define Gradio Interface
@@ -135,7 +133,7 @@ my_inputs = [
     #gr.Audio(source="microphone", type="filepath"), #Gradio 3.48.0
     #gr.Audio(sources=["microphone"], type="filepath",format="wav"), #Gradio 4.x
     #gr.Audio(sources=["microphone"],type="numpy",editable="false"), #Gradio 4.x
-    gr.Microphone(type='numpy',format='wav'), #Gradio 4.x
+    gr.Microphone(type='numpy',value='callable'), #Gradio 4.x
     gr.Radio(["History","H+P","Impression/Plan","Full Visit","Handover","Psych","EMS","SBAR","Meds Only"], show_label=False),
 ]
 
