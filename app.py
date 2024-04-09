@@ -134,7 +134,8 @@ def transcribe(audio, history_type):
 my_inputs = [
     #gr.Audio(source="microphone", type="filepath"), #Gradio 3.48.0
     #gr.Audio(sources=["microphone"], type="filepath",format="wav"), #Gradio 4.x
-    gr.Audio(sources=["microphone"],type="numpy",editable="false"), #Gradio 4.x
+    #gr.Audio(sources=["microphone"],type="numpy",editable="false"), #Gradio 4.x
+    gr.Microphone(type='numpy',format='wav') #Gradio 4.x
     gr.Radio(["History","H+P","Impression/Plan","Full Visit","Handover","Psych","EMS","SBAR","Meds Only"], show_label=False),
 ]
 
