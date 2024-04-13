@@ -1,6 +1,7 @@
 import os
 import openai
 import time
+import numpy as np
 from numpy import True_
 import gradio as gr
 from gradio_rich_textbox import RichTextbox
