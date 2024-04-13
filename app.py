@@ -46,32 +46,32 @@ def transcribe(audio, history_type):
 
 
   ######################## Take Audio from Numpy Array
-  samplerate, audio_data = audio
-  if isinstance(audio_data[0], np.ndarray) and len(audio_data[0]) == 2:
+  #samplerate, audio_data = audio
+  #if isinstance(audio_data[0], np.ndarray) and len(audio_data[0]) == 2:
     # Convert stereo audio data to mono by averaging the two channels
-      audio_data = np.mean(audio_data, axis=1).astype(np.int16)
+  #    audio_data = np.mean(audio_data, axis=1).astype(np.int16)
 
     # If the audio data is already mono, no conversion is needed
       
         
   ######################## Read audio file, if using file
-  #max_attempts = 1
-  #attempt = 0
-  #audio_data = None
-  #samplerate = None
-  #while attempt < max_attempts:
-  #    try:
-  #        if audio is None:
-  #            raise TypeError("Invalid file: None")
-  #        audio_data, samplerate = sf.read(audio)
-  #        break
-  #    except (OSError, TypeError) as e:
-  #        print(f"Attempt {attempt + 1} of {max_attempts} failed with error: {e}")
-  #        attempt += 1
-  #        time.sleep(3)
-  #else:
-  #    print(f"###############Failed to open audio file after {max_attempts} attempts.##############")
-  #    return  # Terminate the function or raise an exception if the file could not be opened
+  max_attempts = 1
+  attempt = 0
+  audio_data = None
+  samplerate = None
+  while attempt < max_attempts:
+      try:
+          if audio is None:
+              raise TypeError("Invalid file: None")
+          audio_data, samplerate = sf.read(audio)
+          break
+      except (OSError, TypeError) as e:
+          print(f"Attempt {attempt + 1} of {max_attempts} failed with error: {e}")
+          attempt += 1
+          time.sleep(3)
+  else:
+      print(f"###############Failed to open audio file after {max_attempts} attempts.##############")
+      return  # Terminate the function or raise an exception if the file could not be opened
 
   ###################Code to convert .wav to .mp3 (if neccesary)
   sf.write("Audio_Files/test.wav", audio_data, samplerate, subtype='PCM_16')
