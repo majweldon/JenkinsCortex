@@ -34,11 +34,10 @@ def transcribe(audio, history_type):
       "Triage": "Triage_Note_Format.txt",
       "Full Visit": "Weldon_Full_Visit_Format.txt",
       "Psych": "Weldon_Psych_Format.txt",
-      "Weldon_Feedback_Format.txt",
-      "Weldon_Dx_DDx_Format.txt",
-      "Weldon_Hallway_Consult_Format.txt"
-      
-   }
+      "Feedback": "Weldon_Feedback_Format.txt",
+      "Hallway Consult": "Weldon_Dx_DDx_Format.txt",
+      "Dx/DDx": "Weldon_Dx_DDx_Format.txt"
+         }
     
   file_name = history_type_map.get(history_type, "Weldon_Full_Visit_Format_HTML.txt")
   with open(f"Format_Library/{file_name}", "r") as f:
@@ -119,7 +118,7 @@ def transcribe(audio, history_type):
 
 
   #Ask OpenAI to create note transcript
-  response = client.chat.completions.create(model="gpt-4-turbo-preview", temperature=0, messages=messages)
+  response = client.chat.completions.create(model="gpt-4-turbo-2024-04-09", temperature=0, messages=messages)
   #response = client.chat.completions.create(model="gpt-3.5-turbo", temperature=0, messages=messages)
     
   note_transcript = response.choices[0].message.content
@@ -133,12 +132,12 @@ my_inputs = [
     #gr.Audio(sources=["microphone"], type="filepath",format="wav"), #Gradio 4.x
     #gr.Audio(sources=["microphone"],type="numpy",editable="false"), #Gradio 4.x
     gr.Microphone(type="numpy"), #Gradio 4.x
-    gr.Radio(["Hallway Consult","Full Visit","Impression/Plan","Dx/DDx","Handover","Psych","Meds Only"], show_label=False),
+    gr.Radio(["Hallway Consult","Full Visit","Feedback","Impression/Plan","Dx/DDx","Handover","Psych","Meds Only"], show_label=False),
 ]
 
 ui = gr.Interface(fn=transcribe,
                   inputs=my_inputs, 
-                  outputs=[RichTextbox(label="Your Note (gpt4-turbo-preview)", elem_id="htext"),
+                  outputs=[RichTextbox(label="Your Note (gpt-4-turbo-2024-04-09)", elem_id="htext"),
                            #gr.Textbox(label="Your Note (GPT 3.5 Turbo)", show_copy_button=True),
                            gr.Number(label="Audio Word Count"),
                            gr.Number(label=".mp3 MB")],
