@@ -51,7 +51,7 @@ def transcribe(audio, history_type):
   if isinstance(audio_data[0], np.ndarray) and len(audio_data[0]) == 2:
     # Convert stereo audio data to mono by averaging the two channels
       audio_data = np.mean(audio_data, axis=1).astype(np.int16)
-  else:
+
     # If the audio data is already mono, no conversion is needed
       
         
