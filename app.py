@@ -131,7 +131,7 @@ my_inputs = [
     #gr.Audio(source="microphone", type="filepath"), #Gradio 3.48.0
     #gr.Audio(sources=["microphone"], type="filepath",format="wav"), #Gradio 4.x
     #gr.Audio(sources=["microphone"],type="numpy",editable="false"), #Gradio 4.x
-    gr.Microphone(type="numpy"), #Gradio 4.x
+    gr.Microphone(type="filepath",format="wav"), #Gradio 4.x
     gr.Radio(["Hallway Consult","Full Visit","Feedback","Impression/Plan","Dx/DDx","Handover","Psych","Meds Only"], show_label=False),
 ]
 
