@@ -28,20 +28,19 @@ def transcribe(audio, history_type):
   print(f"Received audio file path: {audio}")
      
   history_type_map = {
-      "History": "Weldon_History_Format.txt",
-      "Physical": "Weldon_PE_Note_Format.txt",
-      "H+P": "Weldon_History_Physical_Format.txt",
       "Impression/Plan": "Weldon_Impression_Note_Format.txt",
       "Handover": "Weldon_Handover_Note_Format.txt",
       "Meds Only": "Medications.txt",
-      "EMS": "EMS_Handover_Note_Format.txt",
       "Triage": "Triage_Note_Format.txt",
-      "Full Visit": "Weldon_Full_Visit_Format_HTML.txt",
+      "Full Visit": "Weldon_Full_Visit_Format.txt",
       "Psych": "Weldon_Psych_Format.txt",
-      "SBAR": "SBAR.txt"
+      "Weldon_Feedback_Format.txt",
+      "Weldon_Dx_DDx_Format.txt",
+      "Weldon_Hallway_Consult_Format.txt"
       
    }
-  file_name = history_type_map.get(history_type, "Weldon_Full_Visit_Format.txt")
+    
+  file_name = history_type_map.get(history_type, "Weldon_Full_Visit_Format_HTML.txt")
   with open(f"Format_Library/{file_name}", "r") as f:
     role = f.read()
   messages = [{"role": "system", "content": role}]
@@ -74,12 +73,6 @@ def transcribe(audio, history_type):
   #else:
   #    print(f"###############Failed to open audio file after {max_attempts} attempts.##############")
   #    return  # Terminate the function or raise an exception if the file could not be opened
-
-
-  ########## Cast as float 32, normalize
-  #audio_data = audio_data.astype("float32")
-  #audio_data = (audio_data * 32767).astype("int16")
-  #audio_data = audio_data.mean(axis=1)
 
   ###################Code to convert .wav to .mp3 (if neccesary)
   sf.write("Audio_Files/test.wav", audio_data, samplerate, subtype='PCM_16')
@@ -140,7 +133,7 @@ my_inputs = [
     #gr.Audio(sources=["microphone"], type="filepath",format="wav"), #Gradio 4.x
     #gr.Audio(sources=["microphone"],type="numpy",editable="false"), #Gradio 4.x
     gr.Microphone(type="numpy"), #Gradio 4.x
-    gr.Radio(["History","H+P","Impression/Plan","Full Visit","Handover","Psych","EMS","SBAR","Meds Only"], show_label=False),
+    gr.Radio(["Hallway Consult","Full Visit","Impression/Plan","Dx/DDx","Handover","Psych","Meds Only"], show_label=False),
 ]
 
 ui = gr.Interface(fn=transcribe,
