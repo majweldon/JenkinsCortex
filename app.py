@@ -35,7 +35,7 @@ def transcribe(audio, history_type):
       "Full Visit": "Weldon_Full_Visit_Format.txt",
       "Psych": "Weldon_Psych_Format.txt",
       "Feedback": "Weldon_Feedback_Format.txt",
-      "Hallway Consult": "Weldon_Dx_DDx_Format.txt",
+      "Hallway Consult": "Weldon_Hallway_Consult_Format.txt",
       "Dx/DDx": "Weldon_Dx_DDx_Format.txt"
          }
     
