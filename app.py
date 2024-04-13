@@ -48,7 +48,12 @@ def transcribe(audio, history_type):
 
   ######################## Take Audio from Numpy Array
   samplerate, audio_data = audio
-
+  if isinstance(audio_data[0], np.ndarray) and len(audio_data[0]) == 2:
+    # Convert stereo audio data to mono by averaging the two channels
+      audio_data = np.mean(audio_data, axis=1).astype(np.int16)
+  else:
+    # If the audio data is already mono, no conversion is needed
+      
         
   ######################## Read audio file, if using file
   #max_attempts = 1
@@ -130,7 +135,7 @@ def transcribe(audio, history_type):
 
 #Define Gradio Interface
 my_inputs = [
-    #gr.Audio(source="micropone", type="filepath"), #Gradio 3.48.0
+    #gr.Audio(source="microphone", type="filepath"), #Gradio 3.48.0
     #gr.Audio(sources=["microphone"], type="filepath",format="wav"), #Gradio 4.x
     #gr.Audio(sources=["microphone"],type="numpy",editable="false"), #Gradio 4.x
     gr.Microphone(type="numpy"), #Gradio 4.x
