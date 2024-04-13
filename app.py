@@ -11,9 +11,9 @@ from pydub import AudioSegment
 from openai import OpenAI
 
 ########## For creating a debug report
-#import subprocess
-#myGradioEnvironment = subprocess.run(['gradio','environment'], stdout=subprocess.PIPE)
-#print(myGradioEnvironment.stdout.decode('utf-8'))
+import subprocess
+myGradioEnvironment = subprocess.run(['gradio','environment'], stdout=subprocess.PIPE)
+print(myGradioEnvironment.stdout.decode('utf-8'))
 
 # Load API key from an environment variable
 OPENAI_SECRET_KEY = os.environ.get("OPENAI_SECRET_KEY")
