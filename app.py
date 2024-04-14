@@ -137,7 +137,7 @@ my_inputs = [
 
 ui = gr.Interface(fn=transcribe,
                   inputs=my_inputs, 
-                  outputs=[RichTextbox(label="Your Note (gpt-4-turbo-2024-04-09)", show_copy_button=True),
+                  outputs=[RichTextbox(label="Your Note (gpt-4-turbo-2024-04-09)"),
                            #gr.Textbox(label="Your Note (GPT 3.5 Turbo)", show_copy_button=True),
                            gr.Number(label="Audio Word Count"),
                            gr.Number(label=".mp3 MB")],
