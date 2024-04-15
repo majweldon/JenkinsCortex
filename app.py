@@ -123,7 +123,6 @@ def transcribe(audio, history_type):
     
   note_transcript = response.choices[0].message.content
   print(note_transcript)
-  note_transcript = note_transcript.replace('\n', '<br>')
   return [note_transcript, num_words, mp3_megabytes]
 
 #Define Gradio Interface
