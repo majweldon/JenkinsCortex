@@ -39,7 +39,7 @@ def transcribe(audio, history_type):
       "Dx/DDx": "Weldon_Dx_DDx_Format.txt"
          }
     
-  file_name = history_type_map.get(history_type, "Weldon_Full_Visit_Format_HTML.txt")
+  file_name = history_type_map.get(history_type, "Weldon_Full_Visit_Format.txt")
   with open(f"Format_Library/{file_name}", "r") as f:
     role = f.read()
   messages = [{"role": "system", "content": role}]
