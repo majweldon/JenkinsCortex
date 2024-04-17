@@ -131,7 +131,7 @@ my_inputs = [
     #gr.Audio(sources=["microphone"], type="filepath",format="wav"), #Gradio 4.x
     #gr.Audio(sources=["microphone"],type="numpy",editable="false"), #Gradio 4.x
     gr.Microphone(type="filepath",format="wav"), #Gradio 4.x
-    gr.Radio(["Hallway Consult","Full Visit","Feedback","Impression/Plan","Dx/DDx","Handover","Psych","Meds Only"], show_label=False),
+    gr.Radio(["Full Visit","Impression/Plan","Handover","Psych","Hallway Consult","Dx/DDx","Feedback","Meds Only"], show_label=False),
 ]
 
 ui = gr.Interface(fn=transcribe,
@@ -139,7 +139,8 @@ ui = gr.Interface(fn=transcribe,
                   outputs=[#RichTextbox(label="Your Note (gpt-4-turbo-2024-04-09)"),
                            gr.Textbox(label="Your Note (gpt-4-turbo-2024-04-09)", show_copy_button=True),
                            gr.Number(label=".mp3 MB")],
+                  title="Jenkins",
                  )
 
 
-ui.launch(share=False, debug=True)
+ui.launch(share=True, debug=True)
