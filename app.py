@@ -131,7 +131,7 @@ my_inputs = [
     #gr.Audio(sources=["microphone"], type="filepath",format="wav"), #Gradio 4.x
     #gr.Audio(sources=["microphone"],type="numpy",editable="false"), #Gradio 4.x
     gr.Microphone(type="filepath",format="wav"), #Gradio 4.x
-    gr.Radio(["Full Visit","Impression/Plan","Handover","Psych","Hallway Consult","Dx/DDx","Feedback","Meds Only"], show_label=False),
+    gr.Radio(["Full Visit","Impression/Plan","Psych","Handover","Hallway Consult","Dx/DDx","Feedback","Meds Only"], show_label=False),
 ]
 
 ui = gr.Interface(fn=transcribe,
@@ -141,6 +141,6 @@ ui = gr.Interface(fn=transcribe,
                            gr.Number(label=".mp3 MB")],
                   title="Jenkins",
                  )
+ui.config['template'] = '<!DOCTYPE html><html><head><title>Jenkins</title></head><body>{}</body></html>'
 
-
-ui.launch(share=True, debug=True)
+ui.launch(share=False, debug=True)
