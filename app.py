@@ -141,6 +141,6 @@ ui = gr.Interface(fn=transcribe,
                            gr.Number(label=".mp3 MB")],
                   title="Jenkins",
                  )
-ui.config['template'] = '<!DOCTYPE html><html><head><title>Jenkins</title></head><body>{}</body></html>'
+ui.config['template'] = '<!DOCTYPE html><html><title>Jenkins</title><body>{}</body></html>'
 
 ui.launch(share=False, debug=True)
